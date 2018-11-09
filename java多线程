@@ -1,1 +1,27 @@
-一、线程创建
+一、什么是线程
+
+线程的三种创建方式：
+1）继承自Thread类，重写run()方法
+2）实现Runnable接口，实现run()方法
+3）线程池
+
+二、中断线程
+
+中断方式：
+1）程序正常执行完成
+2）程序中发生没有捕获的异常
+3）stop()方法——已弃用
+
+void interrupt():向线程发送中断请求，线程的中断状态被设置成true，如果目前线程被一个sleep()调用阻塞，抛出IterruptedException异常；
+static boolean interrupted():测试当前线程是否被中断，副作用是将中断状态重置为false；
+isInterrupted()：测试线程是否被中断，不会改变中断状态；
+static Thread currentThread():返回当前执行线程的Thread对象。
+
+三、线程状态：
+1、New（新创建）
+2、Runnable（可运行）：线程可能正在运行，也可能没有运行
+3、Blocked（被阻塞）
+4、Waiting（等待）
+5、Timed waiting（计时等待）
+6、Terminated（被终止）
+要确定一个线程的当前状态，可调用getState方法
