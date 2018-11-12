@@ -20,8 +20,29 @@ static Thread currentThread():返回当前执行线程的Thread对象。
 三、线程状态：
 1、New（新创建）
 2、Runnable（可运行）：线程可能正在运行，也可能没有运行
+  1)抢占式调度系统：给每一个运行线程一个时间片来执行任务，当时间片用完，操作系统剥夺该线程的运行权，并给另一个线程运行机会。当选择下一个线程时
+    操作系统考虑线程的优先级
+  2)协作式调度
+    一个线程只有在调用yield方法、或者被阻塞或等待时，线程才失去控制权
 3、Blocked（被阻塞）
+  当一个线程试图获取一个内部的对象锁，而该锁被其他线程持有，则该线程进入阻塞状态。当所有其他线程释放该锁，并且线程调度器允许本线程持有它的时候，
+  该线程将变成非阻塞状态。
 4、Waiting（等待）
+  当线程等待另一个线程通知调度器一个条件时，它自己进入等待状态，在调用Object.wait方法或Thread.join方法、或者是等待java.util.concurrent库中的
+  Lock或Condition时，就会出现这种情况。
 5、Timed waiting（计时等待）
+  带有超时参数的方法有Thread.sleep和Object.wait、Thread.join、Lock.tryLock以及Condition.await
 6、Terminated（被终止）
 要确定一个线程的当前状态，可调用getState方法
+
+void join()
+void join(long millis)
+Thread.State getState()
+已过时方法：
+void stop()
+void suspend()
+void resume()
+
+四、线程属性
+1、线程优先级
+
